@@ -1,0 +1,1 @@
+$pdo = new PDO('mysql:host=mysql.hostinger.fr;dbname=u859190925_divz', 'u859190925_dz', 'C2rdk8yUrMIF');

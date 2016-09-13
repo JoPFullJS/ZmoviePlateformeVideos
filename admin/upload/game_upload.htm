@@ -1,0 +1,73 @@
+<?php
+
+   define('DB_NAME', 'onecaste_game');
+   define('DB_USER', 'onecaste_media');
+   define('DB_PASSWORD', 'wgpz27k@');
+   define('DB_HOST', 'localhost');
+   //define('DB_NAME', 'video_star');
+   //define('DB_USER', 'root');
+   //define('DB_PASSWORD', '');
+   //define('DB_HOST', 'localhost');
+   
+   $rent_bd = mysql_connect( DB_HOST , DB_USER , DB_PASSWORD );
+   mysql_select_db(DB_NAME,$rent_bd);
+   $video_select = "SELECT a.ID_element,a.ID,a.titre,a.description,a.date,a.keyword,b.ID_lien,b.embed_game FROM descriptions AS a,lien AS b WHERE a.ID_element=b.ID_lien AND a.ID_element IN ('".$_GET['id']."')";
+   //On traite la requete de la categorie
+   $req_video = mysql_query($video_select,$rent_bd);
+   
+   
+   if(isset($_POST['envoyer']))
+	 {
+	   $titre=$_POST['titre'];
+	   $description=$_POST['description'];
+	   $mot_cle=$_POST['keyword'];
+	   $date=$_POST['date'];
+	   $descriptions = "UPDATE descriptions SET titre='".$titre."',description='".$description."',keyword='".$mot_cle."',date='".$date."' WHERE ID_element IN ('".$_GET['zx']."')";
+	   $verif_descrption = mysql_query($descriptions,$rent_bd);
+	 }
+?>
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/principal.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/contenu_video.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/upload.css' type='text/css' media='all' />
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<link rel="shortcut icon" href="http://www.divertiz.com/img/img_main/favicon.ico"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.divertiz.com/scriptdv/menu_desk.js"></script>
+<script type="text/javascript" src="http://www.divertiz.com/shared/media_sys.js"></script>
+<script type="text/javascript" src="http://www.divertiz.com/shared/lenght.js"></script>
+<title>upload la video.</title>
+</head>
+
+<body>
+<div style="color:rgb(255,255,255); margin:auto; width:800px;">
+<?php $verif_video = mysql_fetch_array($req_video); ?>
+	<div class="video_embled" style="margin-left:auto; margin-right:auto; width:650px;" >
+	<object type="application/x-shockwave-flash" data="<?php echo $verif_video['embed_game']; ?>" height="414" width="650">
+					<param name="data" value="<?php echo $verif_video['embed_game']; ?>" />
+					<param name="src" value="<?php echo $verif_video['embed_game']; ?>" />
+					<param name="quality" value="high" />
+					</object>
+			</div>
+			
+			<form method="post" action="<?php echo $_SERVER['PHP_SELF'].'?zx='.$_GET['id']; ?>">
+				<div class="desk_video">
+					<div class="float_pprz ch_url">
+					<span class="txt_url_img">Titre de la video :</span><span class="mes_titre">(0 mots | 100 Caracteres restant)</span><br />
+					<textarea class="url_img titre" type="text" name="titre" ><?php echo $verif_video['titre']; ?></textarea> <br/><br />
+					<span class="txt_url_img">Description :</span><span class="mes_desk">(0 mots | 250 Caracteres restant)</span>  <br />
+					<textarea id="desk_img" name="description" type="text"><?php echo $verif_video['description']; ?></textarea> <br /><br />
+					<label class="txt_url_img">Keyword :</label><span class="mes_tag">(0 mots | 6 mots restant)</span><br /><input id="tag" type="text" value="<?php echo $verif_video['keyword']; ?>" name="keyword" /><br/>
+					<label class="txt_url_img">date :</label><span class="mes_tag">(0 mots | 6 mots restant)</span><br /><input id="tag" type="text" value="<?php echo $verif_video['date']; ?>" name="date" />
+					
+					</div>
+				</div>
+				<div><input class="sub_rn" type="submit" name="envoyer" value="Soumettre" /></div>
+			</form>
+
+</div>
+</body>
+</html>

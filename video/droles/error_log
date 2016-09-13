@@ -1,0 +1,6 @@
+[29-Jan-2013 21:32:28 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_votes.php on line 140
+[29-Jan-2013 21:32:28 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_votes.php on line 161
+[29-Jan-2013 21:32:28 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_votes.php on line 183
+[29-Jan-2013 21:34:16 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_vues.php on line 140
+[29-Jan-2013 21:34:16 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_vues.php on line 161
+[29-Jan-2013 21:34:16 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/video/droles/top_vues.php on line 183

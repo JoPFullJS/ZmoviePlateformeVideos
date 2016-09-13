@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "/home/onecaste/public_html/www.divertiz.com/admin/.htpasswd"
+Require valid-user

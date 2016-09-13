@@ -1,0 +1,148 @@
+<?php
+
+   define('DB_NAME', 'onecaste_image');
+   define('DB_USER', 'onecaste_media');
+   define('DB_PASSWORD', 'wgpz27k@');
+   define('DB_HOST', 'localhost');
+   
+   $rent_bd = mysql_connect( DB_HOST , DB_USER , DB_PASSWORD );
+   mysql_select_db(DB_NAME,$rent_bd);
+   
+   $cat_select = "SELECT a.ID_element,a.ID,a.ID_categorie,a.ID_data,a.titre,a.description,a.date,b.ID_lien,b.lk_image,c.id_stat,c.nb_vue,d.ID_compteur,d.vt_pos,d.vt_neg FROM descriptions,e.ID,e.theme AS a,lien AS b,statistiques AS c,compteur AS d,categories AS e WHERE a.ID_element=b.ID_lien AND a.ID_element=c.id_stat AND a.ID_element=d.ID_compteur AND a.ID_categorie=e.ID AND a.description LIKE '%n/a%' ORDER BY a.ID DESC LIMIT 42";
+   //On traite la requete de la categorie
+   $req_select = mysql_query($cat_select,$rent_bd);
+?>
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/principal.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/contenu_video.css' type='text/css' media='all' />
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<link rel="shortcut icon" href="http://www.divertiz.com/img/img_main/favicon.ico"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.divertiz.com/scriptdv/menu_desk.js"></script>
+<script type="text/javascript" src="http://www.divertiz.com/shared/media_sys.js"></script>
+<title>Selection ta video.</title>
+</head>
+
+<body>
+<div style="color:rgb(255,255,255); margin:auto; width:800px;">
+
+			<div class="media_container">
+			<ul class="box_caster">
+			 <?php while($verif_select = mysql_fetch_array($req_select)) { ?>
+			 <li class="width_container float_left">
+			 <div class="date_upload">
+				<div class="txt_info">
+				<span style="margin-left:12px;" class="capitale" >il y a</span>
+				<span style="margin-left:12px;" class="black">
+				<?php   
+				$today = getdate();
+				$date = $today[0];
+				$ajout = strtotime($verif_select['date']);
+				$dif = $date-$ajout;
+
+				if($dif >0 && $dif <= 60)
+				{
+					$when = " un instant";
+					echo $when;
+				}
+				else if($dif > 60 && $dif <= 3600)
+				{
+					$brain = $dif/60;
+					$ago = round($brain,0);
+					$when = $ago." minutes";
+					echo $when;
+				}
+				else if($dif > 3600 && $dif <= 86400)
+				{
+					$brain = $dif/3600;
+					$ago = round($brain,0);
+					$when = $ago." heurs";
+					echo $when;
+				}
+				else if($dif > 86400 && $dif <= 604800)
+				{
+					$brain = $dif/86400;
+					$ago = round($brain,0);
+					$when = $ago." jours";
+					echo $when;
+				}
+				else if($dif > 604800 && $dif <= 2419200)
+				{
+					$brain = $dif/604800;
+					$ago = round($brain,0);
+					$when = $ago." semaines";
+					echo $when;
+				}
+				else if($dif > 2419200 && $dif <= 29030400)
+				{
+					$brain = $dif/2419200;
+					$ago = round($brain,0);
+					$when = $ago." mois";
+					echo $when;
+				}
+				else if($dif > 29030400 && $dif <= 145152000)
+				{
+					$brain = $dif/29030400;
+					$ago = round($brain,0);
+					$when = $ago." ans";
+					echo $when;
+				}
+				else
+				{
+					$when = $ago." plus de 5 ans";
+					echo $when;
+				}
+				?>
+				</span>
+				</div>
+			 </div>
+				<div class="img_container">
+					<a href="http://www.divertiz.com/admin/upload/image_upload.php?id=<?php echo $verif_select['ID_element']; ?>" ><img src="<?php echo $verif_select['lk_image']; ?>" alt="<?php echo $verif_select['titre']; ?>" title="<?php echo $verif_select['titre']; ?>"/></a>
+					<a class="titre_container" href="http://www.divertiz.com/admin/upload/image_upload.php?id=<?php echo $verif_select['ID_element']; ?>" ><?php echo htmlentities($verif_select['titre']); ?></a>
+				</div>
+					<div class="stat_video">
+					    <div class="img_categorie txt_info ">
+							<span class="display black"><?php echo $verif_meta['theme']; ?></span>
+							<span class="capitale display">cat.</span>
+						</div>
+						<div class="img_vues txt_info ">
+							<span class="display black"><?php echo number_format($verif_select['nb_vue'],0,',',','); ?></span>
+							<span class="capitale display">vues</span>
+						</div>
+						<div class="img_classement txt_info ">
+							<span class="display 
+			<?php if($verif_select['vt_pos']>$verif_select['vt_neg']) 
+				{
+					$res=($verif_select['vt_pos']*100)/($verif_select['vt_pos']+$verif_select['vt_neg']);
+					$perct=round($res,0);
+					$rate=$perct;
+					echo " green";
+					echo '">';
+					echo $rate."%";
+				} 
+				else{
+					$res=($verif_select['vt_pos']*100)/($verif_select['vt_pos']+$verif_select['vt_neg']);
+					$perct=round($res,0);
+					$rate=$perct;
+					echo " red";
+				    echo '">';
+				    echo $rate."%";
+				} ?>
+							</span>
+							<span class="capitale display">rating</span>
+						</div>
+					</div>
+				
+			 </li>
+			 <?php } ?>
+			 
+			</ul>
+
+			</div>
+
+</div>
+</body>
+</html>

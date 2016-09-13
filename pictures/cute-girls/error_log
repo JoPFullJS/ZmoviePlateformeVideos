@@ -1,0 +1,6 @@
+[29-Jan-2013 21:32:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_vues.php on line 114
+[29-Jan-2013 21:32:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_vues.php on line 135
+[29-Jan-2013 21:32:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_vues.php on line 157
+[29-Jan-2013 21:37:12 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_votes.php on line 114
+[29-Jan-2013 21:37:12 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_votes.php on line 135
+[29-Jan-2013 21:37:12 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/pictures/cute-girls/top_votes.php on line 157

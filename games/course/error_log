@@ -1,0 +1,6 @@
+[29-Jan-2013 21:37:48 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_votes.php on line 119
+[29-Jan-2013 21:37:48 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_votes.php on line 140
+[29-Jan-2013 21:37:48 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_votes.php on line 162
+[29-Jan-2013 21:37:54 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_vues.php on line 119
+[29-Jan-2013 21:37:55 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_vues.php on line 140
+[29-Jan-2013 21:37:55 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/onecaste/public_html/www.divertiz.com/games/course/top_vues.php on line 162

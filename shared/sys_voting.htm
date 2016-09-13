@@ -1,0 +1,141 @@
+﻿<?php
+
+	define('DB_NAME', 'onecaste_rent');   define('DB_USER', 'onecaste_media');
+   define('DB_PASSWORD', 'wgpz27k@');
+   define('DB_HOST', 'localhost');
+    $connexion = mysql_connect( DB_HOST , DB_USER , DB_PASSWORD );
+    //Selection de la table de donnée
+    mysql_select_db( DB_NAME,$connexion);
+	$select_video = "SELECT ID_compteur,vt_pos,vt_neg FROM compteur WHERE ID_compteur='379721'";
+	$req_select = mysql_query($select_video); 
+	$verif_select = mysql_fetch_array($req_select,MYSQL_ASSOC);
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel='stylesheet'  href='http://www.divertiz.com/csstag/principal.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='../csstag/contenu_video.css' type='text/css' media='all' />
+<link rel='stylesheet'  href='../csstag/upload.css' type='text/css' media='all' />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script language="Javascript" type="text/javascript" src="http://api.easyjquery.com/easyjquery.js"></script>
+<script type="text/javascript" src="../scriptdv/menu_desk.js"></script>
+
+<title>Videos droles,sexy,images insolite,les blogs,business affiliation - VideosCaster</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36262769-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body onload="videorandom(1);">
+<script type="text/javascript" >
+  function getvoting(id,type,element)
+	{
+	
+	
+      $.ajax({
+  	type : 'POST', // envoi des données en GET ou POST
+	url : 'voting_sys.php', // url du fichier de traitement
+	data : {
+		id:id,
+		type:type,
+		element:element
+		}, // données à envoyer en  GET ou POST
+	success : function(data){ // traitements JS à faire APRES le retour d'ajax-search.php
+			if(data)
+			{
+				//si la donné renvoie 1,on verifie le type pour savoir sur que element agir
+				if(type)
+				{
+					//si le type est 1 on agit sur le bouton "up"
+					//showMore(true);
+					//$(".hype-animation").show();
+					//$(".hype-animation").animate({top: -30});
+					//$(".hype-animation").fadeOut('fast', function(){
+						//$(".hype-animation").remove();
+					//});
+					t_up = parseInt(data);
+					var t_down = <?php echo $verif_select['vt_neg']; ?>;
+					var t_percent = (t_up*100)/(t_up+t_down);
+					$(".positif_vote").css("width", t_percent + "%");
+					$("#rate_pos").phpl(t_up);
+				}
+				else
+				{
+					//si le type est 0 on agit sur le bouton "down"
+					//$(".bash-animation").show();
+					//$(".bash-animation").animate({top: -30});
+					//$(".bash-animation").fadeOut('fast', function(){
+						//$(".bash-animation").remove();
+					//});
+					t_down = parseInt(data);
+					var t_up = <?php echo $verif_select['vt_pos']; ?>;
+					var t_percent = (t_up * 100) / (t_up + t_down);
+					$(".positif_vote").css("width", t_percent + "%");
+					$("#rate_neg").phpl(t_down);
+					
+				}
+				$(".pourcentage").phpl('Merci !');
+				$(".pourcentage").css("padding-top", "4px");
+				//$(".pourcentage").css("width", "100%");
+				$(".pourcentage").css("font-size", "14px");
+			}
+			else
+			{
+				//si la donne renvoie 0 l'internaute a "déjà votez !"
+				$(".pourcentage").phpl('Déjà votez !');
+				$(".pourcentage").css("padding-top", "4px");
+				//$(".pourcentage").css("width", "100%");
+				$(".pourcentage").css("font-size", "14px");
+			}
+	}
+      });
+    }
+</script>
+<div style="margin:autos; position:relative; top:250px; width:670px; font-family:arial; font-size:18px; color:rgb(30,30,30)">
+<div class="bar_info" style="margin-left:auto; margin-right:auto; width:640px;">
+			<div class="green_vote float_left">
+			 <a href="" onclick="getvoting(<?php echo $verif_select['ID_compteur']; ?>,1,1); return false;" class="rate_green"><strong class="tex_rate" id="rate_pos"><?php echo $verif_select['vt_pos']; ?></strong></a>
+			</div>
+			<div class="red_vote float_left">
+			<a href="#" onclick="getvoting(<?php echo $verif_select['ID_compteur']; ?>,0,1); return false;" class="rate_red"><strong class="tex_rate" id="rate_neg"><?php echo $verif_select['vt_neg']; ?></strong></a>
+			</div>
+			<div class="stat_vote float_left">
+				<div class="positif_vote" style="width:<?php if($verif_select['vt_pos']>$verif_select['vt_neg']) 
+				{
+					$res=($verif_select['vt_pos']*100)/($verif_select['vt_pos']+$verif_select['vt_neg']);
+					$perct=$res;
+					echo ceil($perct);
+				} 
+				else{
+					$res=($verif_select['vt_pos']*100)/($verif_select['vt_pos']+$verif_select['vt_neg']);
+					$perct=$res;
+					echo ceil($perct);
+				} ?>%"></div>
+				<div class="pourcentage"><?php echo ceil($perct); ?>%</div>
+			</div>
+			<div>
+			 <a  style="color:rgb(220,220,220);" href="../rent/index.php" onclick="voteview(<?php echo $verif_select['ID_compteur']; ?>,1);" id="rate_vue">Video buzz!</a>
+			</div>
+			
+			</div>
+
+</div>
+			<div id="charger" style="color:rgb(220,220,220);" >
+
+			</div>
+			<div></div>
+<?php mysql_close(); ?>
+</body>
+</html>
